@@ -1,0 +1,111 @@
+/* वेरिएबल्स (Variables) - ताकि कलर्स को बदलना आसान हो */
+$primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$button-gradient: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+$text-dark: #333333;
+$text-muted: #666666;
+$border-color: #e2e8f0;
+$input-bg: #f7fafc;
+
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: $primary-gradient;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+
+    .card {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        max-width: 400px;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+
+            h1 {
+                color: $text-dark;
+                font-size: 28px;
+                margin: 0 0 10px 0;
+                font-weight: 700;
+            }
+
+            p {
+                color: $text-muted;
+                font-size: 14px;
+                margin: 0;
+            }
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+
+                label {
+                    color: #4a5568;
+                    font-size: 14px;
+                    font-weight: 600;
+                    text-align: left;
+                }
+
+                input {
+                    width: 100%;
+                    padding: 12px 16px;
+                    border: 2px solid $border-color;
+                    border-radius: 8px;
+                    font-size: 15px;
+                    color: #2d3748;
+                    background-color: $input-bg;
+                    box-sizing: border-box;
+                    transition: all 0.3s ease;
+
+                    &:focus {
+                        outline: none;
+                        border-color: #667eea;
+                        background-color: #ffffff;
+                        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+                    }
+                }
+            }
+
+            button[type="submit"] {
+                background: $button-gradient;
+                color: #ffffff;
+                padding: 14px;
+                border: none;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: opacity 0.2s ease, transform 0.1s ease;
+                margin-top: 10px;
+                box-shadow: 0 4px 12px rgba(118, 75, 162, 0.3);
+
+                &:hover {
+                    opacity: 0.95;
+                }
+
+                &:active {
+                    transform: scale(0.98);
+                }
+            }
+        }
+    }
+}
