@@ -6,7 +6,8 @@ interface Ichat {
     id: number;
     message: string;
     userId: number;
-    createdAt: string
+    createdAt: string;
+    socketId?: string;
 }
 const socket = io("http://localhost:3000", { withCredentials: true });
 
@@ -23,8 +24,9 @@ const Dashboard: React.FC = () => {
             if (response.status === 200) {
                 const newChat = response.data.data;
                 setMessage('');
-                setChatMessage((prev) => [...prev, newChat]);
-                socket.emit('send_message', newChat);
+                const localChatWithSocket = { ...newChat, socketId: socket.id };
+                setChatMessage((prev) => [...prev, localChatWithSocket]);
+                socket.emit('send_message', localChatWithSocket);
             }
 
         } catch (error: any) {
@@ -78,7 +80,9 @@ const Dashboard: React.FC = () => {
                         {chatMessage && chatMessage.map((ch) => (
 
                             <div key={ch.id} className="message-box">
-
+                                <span style={{ fontSize: '12px', color: 'orange' }}>
+                                    User {ch.socketId ? ch.socketId : `DB-${ch.userId}`} said:
+                                </span>
                                 <div className="message-text">
 
                                     {ch.message}
