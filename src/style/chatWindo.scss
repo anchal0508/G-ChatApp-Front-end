@@ -1,45 +1,101 @@
-.dashboard {
+body {
     background-color: rgb(4, 4, 24);
-    max-width: 1800px;
+}
+
+.dashboard {
     width: 100%;
-    padding: 1.25rem;
+    max-width: 1800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    margin: 0;
     text-align: center;
     color: lightgreen;
 
     .main-window {
-        min-height: 80vh;
+        min-height: 95vh;
         display: grid;
         grid-template-columns: 200px auto;
         gap: 20px;
         padding: 1rem;
 
         .left {
-            padding: 0.6rem;
             border: 1px solid cyan;
             border-radius: 10px;
+            background-color: #1f3307;
+            display: grid;
+            grid-template-rows: 30px auto;
+
+            .header {
+                background-color: rgb(6, 6, 90);
+                border-radius: 10px;
+                text-transform: capitalize;
+                font-weight: 600;
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+                padding: 5px 25px;
+            }
+
+            .contact-body {
+                border: 1px solid cyan;
+            }
         }
 
         .middle {
-            // padding: 0.6rem;
             border: 1px solid cyan;
             border-radius: 10px;
-            background-color: #e4f7cf;
-            display: flex;
-            flex-direction: column;
+            background-color: #1f3307;
+            display: grid;
+            /* बदलाव 1: 80% को हटाकर 1fr किया ताकि यह इनपुट फ़ील्ड को बिल्कुल बॉटम में सटा दे */
+            grid-template-rows: 30px 1fr 50px; 
 
-            h2 {
+            .header {
                 background-color: rgb(6, 6, 90);
                 border-radius: 10px;
+                text-transform: capitalize;
+                font-weight: 600;
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+                padding: 5px 25px;
             }
 
-            .chat-pannel {}
+            .chat-pannel {
+                border: 1px solid cyan;
+            }
 
             .form-field {
+                display: flex;
+                padding: 0.5em;
                 width: 100%;
+                /* बदलाव 2: यह लाइन जोड़ी ताकि इनपुट बॉक्स राइट साइड के बॉर्डर से बाहर न निकले */
+                box-sizing: border-box; 
 
                 input {
-                    padding: 0.6rem;
+                    padding: 2px;
+                    font-size: 20px;
                     width: 100%;
+                    border-top-left-radius: 5px;
+                    border-bottom-left-radius: 5px;
+                    border: 1px solid transparent;
+
+                    &:focus {
+                        border-color: cyan;
+                        outline: none;
+                        box-shadow: 0 1px 10px orange;
+                    }
+                }
+
+                button {
+                    padding: 5px 45px;
+                    font-size: 20px;
+                    font-weight: 600;
+                    background-color: orange;
+                    border: 1px solid transparent;
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                    cursor: pointer;
                 }
             }
         }
