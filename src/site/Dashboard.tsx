@@ -3,9 +3,14 @@ import type React from "react";
 
 
 const Dashboard: React.FC = () => {
+
+    const handleChatSubmit = (e: React.SubmitEvent<HTMLElement>) => {
+        e.preventDefault();
+        
+    }
+
     return (
         <div className="dashboard">
-            {/* <h1>Welcome to Dashboard</h1> */}
 
             <div className="main-window">
 
@@ -14,7 +19,7 @@ const Dashboard: React.FC = () => {
                         Contacts
                     </div>
                     <div className="contact-body">
-                        
+
                     </div>
                 </div>
 
@@ -24,7 +29,7 @@ const Dashboard: React.FC = () => {
                     <div className="chat-pannel">
 
                     </div>
-                    <form className="form-field">
+                    <form className="form-field" onSubmit={handleChatSubmit}>
                         <input type="text" name="chat" id="chat" required />
                         <button type="submit">Send</button>
                     </form>

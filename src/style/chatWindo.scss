@@ -33,7 +33,6 @@ body {
                 font-weight: 600;
                 font-size: 20px;
                 display: flex;
-                align-items: center;
                 padding: 5px 25px;
             }
 
@@ -47,7 +46,6 @@ body {
             border-radius: 10px;
             background-color: #1f3307;
             display: grid;
-            /* बदलाव 1: 80% को हटाकर 1fr किया ताकि यह इनपुट फ़ील्ड को बिल्कुल बॉटम में सटा दे */
             grid-template-rows: 30px 1fr 50px; 
 
             .header {
@@ -69,7 +67,6 @@ body {
                 display: flex;
                 padding: 0.5em;
                 width: 100%;
-                /* बदलाव 2: यह लाइन जोड़ी ताकि इनपुट बॉक्स राइट साइड के बॉर्डर से बाहर न निकले */
                 box-sizing: border-box; 
 
                 input {
