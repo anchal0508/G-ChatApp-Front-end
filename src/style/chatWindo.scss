@@ -1,0 +1,47 @@
+.dashboard {
+    background-color: rgb(4, 4, 24);
+    max-width: 1800px;
+    width: 100%;
+    padding: 1.25rem;
+    text-align: center;
+    color: lightgreen;
+
+    .main-window {
+        min-height: 80vh;
+        display: grid;
+        grid-template-columns: 200px auto;
+        gap: 20px;
+        padding: 1rem;
+
+        .left {
+            padding: 0.6rem;
+            border: 1px solid cyan;
+            border-radius: 10px;
+        }
+
+        .middle {
+            // padding: 0.6rem;
+            border: 1px solid cyan;
+            border-radius: 10px;
+            background-color: #e4f7cf;
+            display: flex;
+            flex-direction: column;
+
+            h2 {
+                background-color: rgb(6, 6, 90);
+                border-radius: 10px;
+            }
+
+            .chat-pannel {}
+
+            .form-field {
+                width: 100%;
+
+                input {
+                    padding: 0.6rem;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

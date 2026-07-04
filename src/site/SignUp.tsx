@@ -59,6 +59,8 @@ const Login: React.FC = () => {
 
         } catch (error: any) {
             setMessage(error.message)
+        }finally{
+            setLoading(false);
         }
     }
 
