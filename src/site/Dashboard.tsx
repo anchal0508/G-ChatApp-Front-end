@@ -1,13 +1,14 @@
 import type React from "react";
 import API from "../axiosConfig";
-import { use, useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 interface Ichat {
     id: number;
     message: string;
     userId: number;
     createdAt: string
 }
+const socket = io("http://localhost:3000", { withCredentials: true });
 
 const Dashboard: React.FC = () => {
     const [message, setMessage] = useState<string>('');
@@ -19,9 +20,12 @@ const Dashboard: React.FC = () => {
 
         try {
             const response = await API.post('/chats/addChat', { message });
-            setMessage('');
-            setChatMessage((prev) => [...prev, response.data.data]);
-
+            if (response.status === 200) {
+                const newChat = response.data.data;
+                setMessage('');
+                setChatMessage((prev) => [...prev, newChat]);
+                socket.emit('send_message', newChat);
+            }
 
         } catch (error: any) {
             console.log(error.response?.data?.message || error.message);
@@ -43,6 +47,12 @@ const Dashboard: React.FC = () => {
 
     useEffect(() => {
         getAllMsg();
+        socket.on('receive_message', (data: Ichat) => {
+            setChatMessage((prev) => [...prev, data]);
+        });
+        return () => {
+            socket.off('receive_message');
+        };
     }, []);
 
 
@@ -76,9 +86,9 @@ const Dashboard: React.FC = () => {
                                 </div>
 
                             </div>
-                            
+
                         ))}
-                         
+
                     </div>
                     <form className="form-field" onSubmit={handleChatSubmit}>
                         <input type="text" name="chat" id="chat" required value={message} onChange={(e) => setMessage(e.target.value)} />
