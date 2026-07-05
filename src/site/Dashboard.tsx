@@ -8,6 +8,8 @@ interface Ichat {
     userId: number;
     createdAt: string;
     socketId?: string;
+    senderName?:string;
+    
 }
 const socket = io("http://localhost:3000", { withCredentials: true });
 
@@ -18,15 +20,22 @@ const Dashboard: React.FC = () => {
 
     const handleChatSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
         e.preventDefault();
+        if (!message.trim()) return;
 
         try {
             const response = await API.post('/chats/addChat', { message });
             if (response.status === 200) {
                 const newChat = response.data.data;
                 setMessage('');
-                const localChatWithSocket = { ...newChat, socketId: socket.id };
-                setChatMessage((prev) => [...prev, localChatWithSocket]);
-                socket.emit('send_message', localChatWithSocket);
+                const formattedMessage = {
+                    id: newChat.id,
+                    message: newChat.message,
+                    userId: newChat.userId,
+                    createdAt: newChat.createAt,
+                    senderName: response.data.senderName
+                }
+                setChatMessage((prev) => [...prev, formattedMessage]);
+                socket.emit('send_message', formattedMessage);
             }
 
         } catch (error: any) {
@@ -37,8 +46,10 @@ const Dashboard: React.FC = () => {
         setMessage('');
         try {
             const response = await API.get('/chats/getmsg');
+            console.log('--->>>>-----', response.data);
             if (response.status === 200) {
                 console.log(response.data);
+                
                 setChatMessage(response.data.data || []);
             }
 
@@ -81,7 +92,7 @@ const Dashboard: React.FC = () => {
 
                             <div key={ch.id} className="message-box">
                                 <span style={{ fontSize: '12px', color: 'orange' }}>
-                                    User {ch.socketId ? ch.socketId : `DB-${ch.userId}`} said:
+                                    User {` ${ch.senderName} : DB-${ch.userId}`} said:
                                 </span>
                                 <div className="message-text">
 
