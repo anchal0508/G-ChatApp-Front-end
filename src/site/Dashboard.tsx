@@ -145,7 +145,7 @@ const Dashboard: React.FC = () => {
                 <div className="left">
                     <div className="header">Chat Modes</div>
                     <button onClick={handleSwitchToPublic} style={{ width: '90%', margin: '10px auto', display: 'block', padding: '10px', backgroundColor: chatType === 'public' ? 'orange' : '#222', color: 'white' }}>
-                        🌐 Public Group
+                        Public Group
                     </button>
                     <div className="header" style={{ marginTop: '20px' }}>Start Private Chat</div>
                     <form onSubmit={handleConnectByEmail} style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
